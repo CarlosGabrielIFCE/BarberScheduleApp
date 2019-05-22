@@ -1,0 +1,25 @@
+<ion-content padding>
+  <div style="text-align: center">
+    <img src="../../assets/imgs/skull.jpg" />
+  </div>
+
+  <ion-list>
+    <ion-card>
+      <ion-item>
+        <ion-input type="text" placeholder="Digite o Login" [(ngModel)]="login"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-input type="password" placeholder="Digite a Senha" [(ngModel)]="senha"></ion-input>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <div style="text-align: center">
+    <button ion-button round color="dark" (click)="logar()">Login</button> <br />
+    <button ion-button round color="dark" (click)="cadastrarEmpregado()">Cadastrar Funcionário</button>
+    <p>Encerrar App</p>
+  </div>
+</ion-content>

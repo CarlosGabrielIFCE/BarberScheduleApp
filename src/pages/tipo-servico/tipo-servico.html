@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tipos de Serviço</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 style="text-align: center">Agora cadastre os tipos de serviço que a sua barbearia exerce!</h3>
+
+  <ion-list>
+    <ion-card>
+      <ion-item>
+        <ion-input type="text" placeholder="Digite o Nome do Serviço" [(ngModel)]="nome"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-input type="number" placeholder="Digite o Valor(Dinheiro)" [(ngModel)]="valorDinheiro"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-input type="number" placeholder="Digite o Valor(Cartão)" [(ngModel)]="valorCartao"></ion-input>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <div style="text-align: center">
+    <button ion-button round color="dark" (click)="salvarTipoServico()">Cadastrar</button>
+    <button ion-button round color="dark" (click)="concluirCadastro()">Concluir</button>
+  </div>
+
+  <ion-list *ngFor="let tipo of tipoServico; let i = index;">
+    <ion-card>
+      <ion-item-sliding>
+        <ion-item>
+          <h2>Nome: {{ tipo.nome }}</h2>
+          <p>Valor no dinheiro: R$ {{ tipo.valorDinheiro }}</p>
+          <p>Valor no cartão: R$ {{ tipo.valorCartao }}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="delTipoServico(i)">
+            <ion-icon name="trash"></ion-icon>
+            Excluir
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>

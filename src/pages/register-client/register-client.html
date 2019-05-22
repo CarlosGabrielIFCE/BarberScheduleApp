@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Registro de Funcionário</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-list>
+      <p>Nome</p>
+      <ion-card>
+        <ion-item>
+          <ion-input type="text" placeholder="Nome" [(ngModel)]="nome"></ion-input>
+        </ion-item>
+      </ion-card>
+
+      <p>Telefone</p>
+      <ion-card>
+        <ion-item>
+          <ion-input type="number" placeholder="Telefone" [(ngModel)]="telefone"></ion-input>
+        </ion-item>
+      </ion-card>
+
+    </ion-list>
+  </ion-card>
+  <div style="text-align: center">
+    <button ion-button color="dark" round (click)="addCliente()">Cadastrar</button>
+  </div>
+</ion-content>

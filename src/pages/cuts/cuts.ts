@@ -1,25 +1,38 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { AdicionarServicoPage } from '../adicionar-servico/adicionar-servico';
 import { LocalStorageProvider } from '../../providers/local-storage/local-storage';
 
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-cuts',
+  templateUrl: 'cuts.html',
 })
-export class HomePage {
+export class CutsPage {
   servicos: any;
-  valor: number;
   tipoServico: any;
+  valor: number;
   clientes: any;
+  empregados: any;
+  saldo: any;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public localStorageProv: LocalStorageProvider,
-    public toastCtrl: ToastController,
-    public alertCtrl: AlertController) {
-    this.servicos = this.localStorageProv.getServicos();
-    this.tipoServico = this.localStorageProv.getTipoServico();
-    this.clientes = this.localStorageProv.getClientes();
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public localStorage: LocalStorageProvider,
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController) {
+                this.tipoServico = this.localStorage.getTipoServico();
+                this.clientes = this.localStorage.getClientes();
+                this.empregados = this.localStorage.getEmpregados();
+  }
+
+  ionViewDidLoad() {
+    this.servicos = this.localStorage.getServicos();
+    console.log(this.servicos);
+  }
+
+  adicionarServico() {
+    this.navCtrl.push(AdicionarServicoPage);
   }
 
   cancelarServico(index) {
@@ -30,7 +43,8 @@ export class HomePage {
         text: "Sim",
         handler: () => {
           this.servicos.splice(index, 1);
-          this.toastCtrl.create({ message: "Serviço cancelado com  sucesso!", duration: 3000 }).present();
+          this.localStorage.setServicos(this.servicos);
+          this.toastCtrl.create({message: "Serviço cancelado com  sucesso!", duration: 3000}).present();
         }
       }, {
         text: "Cancelar",
@@ -40,7 +54,7 @@ export class HomePage {
         }
       }]
     }).present();
-    this.localStorageProv.setServicos(this.servicos);
+    this.localStorage.setServicos(this.servicos);
   }
 
   finalizarServico(index) {
@@ -71,20 +85,29 @@ export class HomePage {
                 console.log("Dinheiro");
                 this.valor = this.tipoServico[i].valorDinheiro;
                 this.servicos[index].valor = this.valor;
+                this.saldo += this.valor;
               }else if (data[0] == "1") {
                 console.log("Cartão");
                 this.valor = this.tipoServico[i].valorCartao;
                 this.servicos[index].valor = this.valor;
+                this.saldo += this.valor;
               }
               for  (let i = 0; i < this.clientes.length;i++) {
-                if(this.clientes[i].nome == this.servicos[i].client) {
+                if(this.clientes[i].nome == this.servicos[index].client) {
                   console.log(this.clientes[index]);
                   this.clientes[i].qtdCortes++;
-                  this.localStorageProv.setClientes(this.clientes);
+                  this.localStorage.setClientes(this.clientes);
                 }
               }
+              for (let i = 0; i < this.empregados.length;i++) {
+                if (this.empregados[i].nome == this.servicos[index].empregado) {
+                  this.empregados[i].saldo += this.valor;
+                }
+              }
+              this.localStorage.setSaldo(this.saldo);
+              this.localStorage.setServicos(this.servicos);
+              this.localStorage.setEmpregados(this.empregados);
               console.log(this.valor);
-              this.localStorageProv.setServicos(this.servicos);
             }
           });
           alert.present();

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Adicionar Corte</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>Cliente</ion-label>
+        <ion-select [(ngModel)]="client">
+          <ion-option *ngFor="let cliente of clientes" value="{{cliente.nome}}">{{ cliente.nome }}</ion-option>
+          <ion-option value="'Cliente Avulso'">Cliente Avulso</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label>Cortes Disponíveis</ion-label>
+        <ion-select [(ngModel)]="tipoServ">
+          <ion-option *ngFor="let tipo of tipoServico;let i = index;" value="{{ tipo.nome }}">{{ tipo.nome }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label>Barbeiro</ion-label>
+        <ion-select [(ngModel)]="empregado">
+          <ion-option *ngFor="let func of empregados;" value="{{ func.nome }}">{{ func.nome }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+  </ion-list>
+
+  <ion-card>
+    <ion-card-header>Resumo do Serviço</ion-card-header>
+    <ion-card-content>
+      <h2>Nome do Cliente: {{ client }}</h2>
+      <p>Tipo de Serviço: {{ tipoServ }}</p>
+      <p>Barbeiro: {{ empregado }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="text-align: center">
+    <button ion-button round color="dark" (click)="salvarServico()">Salvar Serviço</button>
+  </div>
+
+</ion-content>

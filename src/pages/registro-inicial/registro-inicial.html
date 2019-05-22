@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-title>Registro Inicial</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 style="text-align: center">Bem vindo ao registro inicial, faça seu registro para poder começar a usar o aplicativo!</h3>
+
+  <ion-list>
+    <ion-card>
+      <ion-item>
+        <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+        <ion-item>
+          <ion-input type="text" placeholder="Digite seu CPF" [(ngModel)]="cpf"></ion-input>
+        </ion-item>
+      </ion-card>
+
+      <ion-card>
+          <ion-item>
+            <ion-input type="text" placeholder="Digite seu telefone" [(ngModel)]="telefone"></ion-input>
+          </ion-item>
+        </ion-card>
+  </ion-list>
+
+  <div style="text-align: center">
+    <button ion-button round color="dark" (click)="salvar()">Salvar</button>
+  </div>
+</ion-content>

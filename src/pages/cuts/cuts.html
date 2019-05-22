@@ -3,31 +3,34 @@
     <button ion-button menuToggle color="dark">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Barboo</ion-title>
+    <ion-title>Cortes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div style="text-align: center">
-    <img src="../../assets/imgs/barbershop.png" />
+  <div style="text-align:center">
+    <button ion-button round color="dark" (click)="adicionarServico()">
+      Adicionar Serviço
+    </button>
   </div>
-  <p style="text-align: center">
-    Bem vindo ao Barboo App, a Agenda da sua Barbearia diretamente do seu celular!<br />
-  </p>
-
-  <h2 style="text-align: center">Serviços agendados</h2>
   <ion-card *ngFor="let servico of servicos; let i = index;">
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col col-md-6>
-            <img src="../../assets/imgs/skull.jpg"/>
+            <img src="../../assets/imgs/skull.jpg" />
           </ion-col>
           <ion-col col-md-6>
             <h3>Nome do Cliente: {{ servico.client }}</h3>
             <p>Corte: {{ servico.tipoServ }}</p>
             <p>Barbeiro: {{ servico.empregado }}</p>
             <h2>R$ {{ servico.valor }}</h2>
+            <button ion-button icon-only (click)="callClient()">
+              <ion-icon name="call"></ion-icon>
+            </button>
+            <button ion-button icon-only color="secondary" (click)="sendMessage()">
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
       </ion-grid>

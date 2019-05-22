@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle color="dark">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Clientes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align:center">
+    <button ion-button round color="dark" (click)="addCliente()">Adicionar Cliente</button>
+  </div>
+  <ion-list *ngFor="let cliente of clientes; let i = index;">
+    <ion-card>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/skull.jpg">
+          </ion-avatar>
+          <h2>Nome: {{ cliente.nome }}</h2>
+          <p>Telefone: {{ cliente.telefone }}</p>
+          <p>Cortes: {{ cliente.qtdCortes }} </p>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="primary" (click)="adicionarServico(i)">
+            <ion-icon name="text"></ion-icon>
+            Adicionar Corte
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="delCliente(i)">
+            <ion-icon name="trash"></ion-icon>
+            Excluir
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>

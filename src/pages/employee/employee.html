@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle color="dark">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Funcionários</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div style="text-align:center">
+        <button ion-button round color="dark" (click)="addFuncionario()">Adicionar Funcionario</button>
+      </div>
+      <ion-list *ngFor="let empregado of empregados; let i = index;">
+        <ion-card>
+          <ion-item-sliding>
+            <ion-item>
+              <ion-avatar item-start>
+                <img src="../../assets/imgs/skull.jpg">
+              </ion-avatar>
+              <h2>Nome: {{ empregado.nome }}</h2>
+              <p>Telefone: {{ empregado.telefone }}</p>
+              <p>Saldo: {{ empregado.saldo }}</p>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="danger" (click)="delEmpregado(i)">
+                <ion-icon name="trash"></ion-icon>
+                Excluir
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+      </ion-list>
+</ion-content>
